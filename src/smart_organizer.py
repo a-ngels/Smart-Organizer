@@ -2,11 +2,11 @@ import os
 import shutil
 
 # directories needed to manage files
-images = "/IMAGES/"
-audios = "/AUDIOS/"
-videos = "/VIDEOS/"
-documents = "/DOCUMENTS/"
-zip_files = "/ZIP_FILES/"
+images = "IMAGES"
+audios = "AUDIOS"
+videos = "VIDEOS"
+documents = "DOCUMENTS"
+zip_files = "ZIP_FILES"
 
 # file extensions used to assign to a directory
 image_extensions = ["apng", "avif", "gif", "jpg", "jpeg", "png", "svg", "webp"]
@@ -27,8 +27,8 @@ files = os.listdir()
 # create needed directories if they dont exist
 def create_directories():
     for directory in directories_list:
-        if not os.path.exists(path + directory):
-            os.mkdir(path + directory)
+        if not os.path.exists(os.path.join(path, directory)):
+            os.mkdir(os.path.join(path, directory))
 
 # get the file name without extension
 def extension(file):
@@ -38,16 +38,17 @@ def extension(file):
 def organize_files():
     for file in files:
         if extension(file) in image_extensions:
-            shutil.move(file, path + images)
+            shutil.move(file, os.path.join(path, images))
         elif extension(file) in audio_extensions:
-            shutil.move(file, audios)
+            shutil.move(file, os.path.join(path, audios))
         elif extension(file) in video_extensions:
-            shutil.move(file, videos)
+            shutil.move(file, os.path.join(path, videos))
         elif extension(file) in document_extensions:
-            shutil.move(file, documents)
+            shutil.move(file, os.path.join(path, documents))
         elif extension(file) in zip_extensions:
-            shutil.move(file, zip_files)
+            shutil.move(file, os.path.join(path, zip_files))
            
 # call functions to create directories and move files
 create_directories()
 organize_files()
+
